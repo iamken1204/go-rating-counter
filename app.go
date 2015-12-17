@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 	web "github.com/iamken1204/rating-counter-web"
 )
 

@@ -44,35 +44,41 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2);
+	module.exports = __webpack_require__(3);
 
 
 /***/ },
 /* 1 */,
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _vue = __webpack_require__(3);
+	var _vue = __webpack_require__(4);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _app = __webpack_require__(5);
+	var _app = __webpack_require__(6);
 	
 	var _app2 = _interopRequireDefault(_app);
+	
+	var _list = __webpack_require__(9);
+	
+	var _list2 = _interopRequireDefault(_list);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	new _vue2.default({
 	    el: 'body',
 	    components: {
-	        app: _app2.default
+	        app: _app2.default,
+	        list: _list2.default
 	    }
 	});
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -9472,10 +9478,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9572,13 +9578,13 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6)
+	module.exports = __webpack_require__(7)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(7)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(8)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -9592,7 +9598,7 @@
 	})()}
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -9617,10 +9623,77 @@
 	// </script>
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n  <h1>{{ msg }}</h1>\n</div>";
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(10)
+	
+	if (module.exports.__esModule) module.exports = module.exports.default
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(11)
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/Kettan/Go/src/github.com/iamken1204/rating-counter-main/public/js/list.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	  }
+	})()}
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// <template>
+	//   <div>
+	//     <h1>{{message}}</h1>
+	//     <button v-on:click="setM">click me</button>
+	//   </div>
+	// </template>
+	
+	// <script>
+	exports.default = {
+	  data: function data() {
+	    return {
+	      message: ""
+	    };
+	  },
+	  ready: function ready() {
+	    this.init();
+	  },
+	
+	  methods: {
+	    init: function init() {
+	      this.message = "Init Method-2";
+	    },
+	    setM: function setM() {
+	      this.message = "Setted message.";
+	    }
+	  },
+	  destroyed: function destroyed() {
+	    clearInterval(this.handle);
+	  }
+	};
+	// </script>
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n    <h1>{{message}}</h1>\n    <button v-on:click=\"setM\">click me</button>\n  </div>";
 
 /***/ }
 /******/ ]);
