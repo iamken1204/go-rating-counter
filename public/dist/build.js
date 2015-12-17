@@ -44,13 +44,21 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(2);
+
+
+/***/ },
+/* 1 */,
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
-	var _vue = __webpack_require__(2);
+	var _vue = __webpack_require__(3);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _app = __webpack_require__(4);
+	var _app = __webpack_require__(5);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -62,61 +70,9 @@
 	        app: _app2.default
 	    }
 	});
-	
-	// var host_prefix = 'http://localhost:1234';
-	// $(document).ready(function() {
-	//     // JSONP version - add 'callback=?' to the URL - fetch the JSONP response to the request
-	//     $("#jsonp-button").click(function(e) {
-	//         e.preventDefault();
-	//         // The only difference on the client end is the addition of 'callback=?' to the URL
-	//         var url = host_prefix + '/viewtest?callback=?';
-	//         $.getJSON(url, function(jsonp) {
-	//             console.log(jsonp);
-	//             $("#jsonp-response").html(JSON.stringify(jsonp, null, 2));
-	//         });
-	//     });
-	// });
-	
-	// Vue.config.delimiters = ['(%', '%)'];
-	
-	// var demo = new Vue({
-	//   el: '#demo',
-	//   data: {
-	//     message: 'Hello Vue.js!'
-	//   },
-	//   ready: function() {
-	//     this.iii()
-	//   },
-	//   methods: {
-	//     iii: function() {
-	//         console.log('aa')
-	//         this.message = "WOWOWOWOWWOWOOW"
-	//     }
-	//   }
-	// })
-	
-	// var demo = new Vue({
-	//     el: '#vtest',
-	
-	//     data: {
-	//         message: "Hello Vue!"
-	//     },
-	
-	//     ready: function() {
-	//         this.init()
-	//     },
-	
-	//     methods: {
-	//         init: function() {
-	//             console.log(Vue.config.delimiters)
-	//             this.message = "Hello Vue!!!"
-	//         },
-	//     }
-	// })
 
 /***/ },
-/* 1 */,
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -9516,10 +9472,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9616,13 +9572,13 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(5)
+	module.exports = __webpack_require__(6)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(6)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(7)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -9636,7 +9592,7 @@
 	})()}
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -9661,7 +9617,7 @@
 	// </script>
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n  <h1>{{ msg }}</h1>\n</div>";

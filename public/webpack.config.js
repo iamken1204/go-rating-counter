@@ -1,7 +1,7 @@
 var webpack = require('webpack')
 
 module.exports = {
-  entry: __dirname + '/js/index.js',
+  entry: [__dirname + '/js/index.js'],
   output: {
     path: './dist',
     filename: 'build.js'

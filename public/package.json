@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Fetch specific keyword's rating in search engine.",
   "main": "index.html",
-  "scripts": {},
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
   "dependencies": {
     "vue": "^1.0.11"
   },
