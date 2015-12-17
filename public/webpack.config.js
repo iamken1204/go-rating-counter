@@ -1,14 +1,9 @@
 var webpack = require('webpack')
 
 module.exports = {
-  entry: {
-    './js/index.js',
-    './js/vendor/vue-resources.min.js',
-    './js/vendor/vue.min.js'
-  },
+  entry: __dirname + '/js/index.js',
   output: {
     path: './dist',
-    publicPath: 'dist/',
     filename: 'build.js'
   },
   module: {
