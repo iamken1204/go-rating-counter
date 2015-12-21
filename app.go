@@ -8,5 +8,5 @@ import (
 func main() {
 	port := ":1234"
 	fmt.Printf("Start server on: %s", port)
-	web.Serve(":1234")
+	web.Serve(port)
 }
