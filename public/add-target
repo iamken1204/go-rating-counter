@@ -1,0 +1,6 @@
+<h1>Add Target</h1>
+
+<form method="post" action="/create">
+關鍵字：<input name="keyword">
+網址：<input name="url">
+<button type="submit">送出</button>

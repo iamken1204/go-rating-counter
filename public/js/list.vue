@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <h1>{{message}}</h1>
-    <button v-on:click="setM">click me</button>
+  <div v-for="target in targets">
+    <h5>{{ target.id }}</h5>
+    <h5>{{ target.keyword }}</h5>
+    <h5>{{ target.url }}</h5>
   </div>
 </template>
 
@@ -9,7 +10,8 @@
 export default {
   data () {
     return {
-        message: ""
+        message: "",
+        targets: []
     }
   },
   ready () {
@@ -17,10 +19,9 @@ export default {
   },
   methods: {
     init () {
-        this.message = "Init Method-2"
-    },
-    setM () {
-        this.message = "Setted message."
+        this.$http.post('/api/targets?callback=?', function(targets) {
+          this.targets = targets
+        })
     }
   },
   destroyed () {
