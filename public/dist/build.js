@@ -44,43 +44,50 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(3);
+	module.exports = __webpack_require__(4);
 
 
 /***/ },
 /* 1 */,
 /* 2 */,
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _vue = __webpack_require__(4);
+	var _vue = __webpack_require__(5);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _app = __webpack_require__(6);
+	var _app = __webpack_require__(7);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _list = __webpack_require__(9);
+	var _list = __webpack_require__(10);
 	
 	var _list2 = _interopRequireDefault(_list);
 	
+	var _search = __webpack_require__(13);
+	
+	var _search2 = _interopRequireDefault(_search);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_vue2.default.use(__webpack_require__(12));
+	_vue2.default.use(__webpack_require__(16));
+	_vue2.default.http.options.emulateJSON = true;
 	
 	new _vue2.default({
 	    el: 'body',
 	    components: {
 	        app: _app2.default,
+	        search: _search2.default,
 	        list: _list2.default
 	    }
 	});
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -9480,10 +9487,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9580,18 +9587,18 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(7)
+	module.exports = __webpack_require__(8)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(8)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(9)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/Kettan/Go/src/github.com/iamken1204/rating-counter-main/public/js/app.vue"
+	  var id = "/Users/Kettan/Go/src/github.com/iamken1204/rating-counter-main/public/js/components/app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -9600,7 +9607,7 @@
 	})()}
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -9611,7 +9618,7 @@
 	// <template>
 	// <div>
 	//   <h1>{{ msg }}</h1>
-	//   <button v-on:click="addTarget">新增</button
+	//   <!-- <button v-on:click="addTarget">新增</button> -->
 	// </div>
 	// </template>
 	
@@ -9619,7 +9626,7 @@
 	exports.default = {
 	  data: function data() {
 	    return {
-	      msg: "Hello Vue app!"
+	      msg: "Rating Counter"
 	    };
 	  },
 	
@@ -9632,24 +9639,24 @@
 	// </script>
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n  <h1>{{ msg }}</h1>\n  <button v-on:click=\"addTarget\">新增</button\n</div>\n</template>";
+	module.exports = "<div>\n  <h1>{{ msg }}</h1>\n  <!-- <button v-on:click=\"addTarget\">新增</button> -->\n</div>";
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(10)
+	module.exports = __webpack_require__(11)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(11)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(12)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/Kettan/Go/src/github.com/iamken1204/rating-counter-main/public/js/list.vue"
+	  var id = "/Users/Kettan/Go/src/github.com/iamken1204/rating-counter-main/public/js/components/list.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -9658,7 +9665,7 @@
 	})()}
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -9688,7 +9695,7 @@
 	
 	  methods: {
 	    init: function init() {
-	      this.$http.post('/api/targets?callback=?', function (targets) {
+	      this.$http.post('/api/targets', function (targets) {
 	        this.targets = targets;
 	      });
 	    }
@@ -9700,13 +9707,104 @@
 	// </script>
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = "<div v-for=\"target in targets\">\n    <h5>{{ target.id }}</h5>\n    <h5>{{ target.keyword }}</h5>\n    <h5>{{ target.url }}</h5>\n  </div>";
 
 /***/ },
-/* 12 */
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(14)
+	
+	if (module.exports.__esModule) module.exports = module.exports.default
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(15)
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/Kettan/Go/src/github.com/iamken1204/rating-counter-main/public/js/components/search.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	  }
+	})()}
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	// <div>
+	//     <h1>搜尋網址</h1>
+	//     <input name="url" v-model="url">
+	//     <button v-on:click="searchUrl">搜尋</button>
+	// </div>
+	// <div>
+	//     <!-- <h4 v-if="urlIsExist()">關鍵字：{{ keyword }}網址：{{ url }}</h4> -->
+	//     <table>
+	//         <tr>
+	//             <td>名次</td>
+	//             <td>紀錄日期</td>
+	//         </tr>
+	//         <tr v-for="seo in seos">
+	//             <td>{{ seo.rating }}</td>
+	//             <td>{{ seo.recorded_at }}</td>
+	//         </tr>
+	//     </table>
+	// </div>
+	// </template>
+	
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            keyword: "",
+	            url: "",
+	            seos: []
+	        };
+	    },
+	
+	    methods: {
+	        searchUrl: function searchUrl() {
+	            if (this.urlIsExist(this.url)) {
+	                this.renderSeo();
+	            }
+	        },
+	        urlIsExist: function urlIsExist(url) {
+	            var data = { url: url };
+	            this.$http.post('/api/search/url', data, function (res) {
+	                console.log(res);
+	                this.seos = res;
+	            });
+	            return true;
+	        },
+	        renderSeo: function renderSeo() {
+	            console.log(this.seos);
+	        }
+	    },
+	
+	    destroyed: function destroyed() {
+	        clearInterval(this.handle);
+	    }
+	};
+	// </script>
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n    <h1>搜尋網址</h1>\n    <input name=\"url\" v-model=\"url\">\n    <button v-on:click=\"searchUrl\">搜尋</button>\n</div>\n<div>\n    <!-- <h4 v-if=\"urlIsExist()\">關鍵字：{{ keyword }}網址：{{ url }}</h4> -->\n    <table>\n        <tr>\n            <td>名次</td>\n            <td>紀錄日期</td>\n        </tr>\n        <tr v-for=\"seo in seos\">\n            <td>{{ seo.rating }}</td>\n            <td>{{ seo.recorded_at }}</td>\n        </tr>\n    </table>\n</div>";
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9715,11 +9813,11 @@
 	
 	function install(Vue) {
 	
-	    var _ = __webpack_require__(13)(Vue);
+	    var _ = __webpack_require__(17)(Vue);
 	
-	    Vue.url = __webpack_require__(14)(_);
-	    Vue.http = __webpack_require__(15)(_);
-	    Vue.resource = __webpack_require__(19)(_);
+	    Vue.url = __webpack_require__(18)(_);
+	    Vue.http = __webpack_require__(19)(_);
+	    Vue.resource = __webpack_require__(23)(_);
 	
 	    Object.defineProperties(Vue.prototype, {
 	
@@ -9751,7 +9849,7 @@
 	module.exports = install;
 
 /***/ },
-/* 13 */
+/* 17 */
 /***/ function(module, exports) {
 
 	/**
@@ -9837,7 +9935,7 @@
 
 
 /***/ },
-/* 14 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -10000,16 +10098,16 @@
 
 
 /***/ },
-/* 15 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 	
-	var xhr = __webpack_require__(16);
-	var jsonp = __webpack_require__(18);
-	var Promise = __webpack_require__(17);
+	var xhr = __webpack_require__(20);
+	var jsonp = __webpack_require__(22);
+	var Promise = __webpack_require__(21);
 	
 	module.exports = function (_) {
 	
@@ -10166,14 +10264,14 @@
 
 
 /***/ },
-/* 16 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp request.
 	 */
 	
-	var Promise = __webpack_require__(17);
+	var Promise = __webpack_require__(21);
 	var XDomain = window.XDomainRequest;
 	
 	module.exports = function (_, options) {
@@ -10223,7 +10321,7 @@
 
 
 /***/ },
-/* 17 */
+/* 21 */
 /***/ function(module, exports) {
 
 	/**
@@ -10439,14 +10537,14 @@
 
 
 /***/ },
-/* 18 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP request.
 	 */
 	
-	var Promise = __webpack_require__(17);
+	var Promise = __webpack_require__(21);
 	
 	module.exports = function (_, options) {
 	
@@ -10495,7 +10593,7 @@
 
 
 /***/ },
-/* 19 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/**

@@ -40,6 +40,12 @@ func ApiTargets(c *echo.Context) error {
 	return c.JSON(http.StatusOK, &targets)
 }
 
+func ApiSearchUrl(c *echo.Context) error {
+	url := c.Form("url")
+	targets := rc.GetTargetsByUrl(url)
+	return c.JSON(http.StatusOK, &targets)
+}
+
 func Serve(port string) {
 	e := echo.New()
 	e.ServeDir("/", "public")
@@ -47,6 +53,7 @@ func Serve(port string) {
 	e.Get("/viewtest", Viewtest)
 	e.Post("/create", CreateTarget)
 
+	e.Post("/api/search/url", ApiSearchUrl)
 	e.Post("/api/targets", ApiTargets)
 
 	e.Run(port)

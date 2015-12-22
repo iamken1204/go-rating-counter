@@ -1,6 +1,7 @@
 package rating_counter
 
 import (
+	// "fmt"
 	// "time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -12,15 +13,15 @@ type Targets struct {
 	Keyword string `json:"keyword"`
 	Url     string `json:"url"`
 	Status  string `json:"status"`
-	Log     Logs   `json:"log"`
+	Log     []Logs `json:"log"`
 }
 
 type Logs struct {
-	ID         int
-	MTargetID  int
-	Rating     int
-	Page       int
-	RecordedAt string
+	ID         int    `json:"id"`
+	MTargetID  int    `json:"target_id"`
+	Rating     int    `json:"rating"`
+	Page       int    `json:"page"`
+	RecordedAt string `json:"recorded_at"`
 }
 
 func (l Logs) TableName() string {
@@ -54,11 +55,23 @@ func GetTargets() []Targets {
 	return targets
 }
 
+func GetTargetsByUrl(url string) []Logs {
+	db, err := gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/golang_test")
+	checkError(err)
+	defer db.Close()
+	targets := []Targets{}
+	db.Where("url = ?", url).Find(&targets)
+	id := targets[0].ID
+	logs := []Logs{}
+	db.Where("target_id = ?", id).Find(&logs)
+	return logs
+}
+
 func Create(data func(string) string) bool {
 	db, err := gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/golang_test")
 	checkError(err)
 	defer db.Close()
-	var log Logs
+	var log []Logs
 	// timestamp := time.Now().Local().Format("2006-01-02 15:04:05")
 	target := Targets{0, data("keyword"), data("url"), "1", log}
 	db.NewRecord(target)
