@@ -42,7 +42,10 @@ func ApiTargets(c *echo.Context) error {
 
 func ApiSearchUrl(c *echo.Context) error {
 	url := c.Form("url")
-	targets := rc.GetTargetsByUrl(url)
+	targets := rc.NewEmptyLogs()
+	if url != "" {
+		targets = rc.GetTargetsByUrl(url)
+	}
 	return c.JSON(http.StatusOK, &targets)
 }
 

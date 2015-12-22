@@ -78,3 +78,8 @@ func Create(data func(string) string) bool {
 	db.Create(&target)
 	return true
 }
+
+func NewEmptyLogs() []Logs {
+	ts := []Logs{}
+	return ts
+}
