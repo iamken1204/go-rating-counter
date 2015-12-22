@@ -9,10 +9,9 @@
 </head>
 
 <body>
-    <app></app>
-    <search></search>
-    <!-- <list></list> -->
+    <addpanel></addpanel>
+    <list></list>
 </body>
 
-<script src="/dist/index.build.js"></script>
+<script src="/dist/add.build.js"></script>
 </html>

@@ -39,7 +39,6 @@ export default {
         urlIsExist (url) {
             var data = {url: url}
             this.$http.post('/api/search/url', data, function(res) {
-                console.log(res)
                 this.seos = res
             })
             return true

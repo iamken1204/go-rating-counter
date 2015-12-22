@@ -54,7 +54,7 @@ func Serve(port string) {
 	e.ServeDir("/", "public")
 
 	e.Get("/viewtest", Viewtest)
-	e.Post("/create", CreateTarget)
+	e.Post("/api/create", CreateTarget)
 
 	e.Post("/api/search/url", ApiSearchUrl)
 	e.Post("/api/targets", ApiTargets)

@@ -1,8 +1,8 @@
 <template>
   <div v-for="target in targets">
-    <h5>{{ target.id }}</h5>
     <h5>{{ target.keyword }}</h5>
     <h5>{{ target.url }}</h5>
+    <hr>
   </div>
 </template>
 
