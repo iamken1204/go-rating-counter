@@ -47,7 +47,7 @@ func InitTarget(keyword, url string, startCount, startRating int) Target {
 }
 
 func GetTargets() []Targets {
-	db, err := gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/golang_test")
+	db, err := gorm.Open("mysql", "app:app@tcp(localhost:3306)/rating_counter")
 	checkError(err)
 	defer db.Close()
 	targets := []Targets{}
@@ -56,7 +56,7 @@ func GetTargets() []Targets {
 }
 
 func GetTargetsByUrl(url string) []Logs {
-	db, err := gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/golang_test")
+	db, err := gorm.Open("mysql", "app:app@tcp(localhost:3306)/rating_counter")
 	checkError(err)
 	defer db.Close()
 	targets := []Targets{}
@@ -68,12 +68,12 @@ func GetTargetsByUrl(url string) []Logs {
 }
 
 func Create(data func(string) string) bool {
-	db, err := gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/golang_test")
+	db, err := gorm.Open("mysql", "app:app@tcp(localhost:3306)/rating_counter")
 	checkError(err)
 	defer db.Close()
 	var log []Logs
 	// timestamp := time.Now().Local().Format("2006-01-02 15:04:05")
-	target := Targets{0, data("url"), data("keyword"), "1", log}
+	target := Targets{0, data("keyword"), data("url"), "1", log}
 	db.NewRecord(target)
 	db.Create(&target)
 	return true

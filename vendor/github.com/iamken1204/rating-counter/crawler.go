@@ -36,7 +36,7 @@ func Crawl(targetID int, engine, keyword, targetUrl string) {
 		startCount = -9
 		startRating = 1
 	}
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/golang_test")
+	db, err := sql.Open("mysql", "app:app@tcp(127.0.0.1:3306)/rating_counter")
 	checkError(err)
 	defer db.Close()
 	err = db.Ping()

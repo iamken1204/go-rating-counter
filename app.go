@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	port := ":1234"
+	port := ":8080"
 	fmt.Printf("Start server on: %s", port)
 	web.Serve(port)
 }
