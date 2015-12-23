@@ -11,10 +11,13 @@
         <tr>
             <td>名次</td>
             <td>紀錄日期</td>
+            <td>搜尋引擎</td>
         </tr>
         <tr v-for="seo in seos">
             <td>{{ seo.rating }}</td>
             <td>{{ seo.recorded_at }}</td>
+            <td v-if="seo.search_engine=='google'" style="color:blue;">{{ seo.search_engine }}</td>
+            <td v-else style="color:purple;">{{ seo.search_engine }}</td>
         </tr>
     </table>
 </div>

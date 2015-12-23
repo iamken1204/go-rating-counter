@@ -17,11 +17,12 @@ type Targets struct {
 }
 
 type Logs struct {
-	ID         int    `json:"id"`
-	MTargetID  int    `json:"target_id"`
-	Rating     int    `json:"rating"`
-	Page       int    `json:"page"`
-	RecordedAt string `json:"recorded_at"`
+	ID           int    `json:"id"`
+	MTargetID    int    `json:"target_id"`
+	SearchEngine string `json:"search_engine"`
+	Rating       int    `json:"rating"`
+	Page         int    `json:"page"`
+	RecordedAt   string `json:"recorded_at"`
 }
 
 func (l Logs) TableName() string {
