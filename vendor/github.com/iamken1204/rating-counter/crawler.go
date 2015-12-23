@@ -7,26 +7,26 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 /**
- * @param os.Args[1] string (google|yahoo)
- *                          The target search engine
- * @param os.Args[2] string Keyword of searching
- * @param os.Args[3] string Url that want to assert
+ * @param engine  string (google|yahoo)
+ *                       The target search engine
+ * @param keyword string Keyword of searching
+ * @param url     string Url that want to assert
  */
-func Crawl() {
-	checkParam()
-
+func Crawl(targetID int, engine, keyword, targetUrl string) {
+	// checkParam()
 	var queryFormat string
 	var querySelector string
 	var startCount int
 	var startRating int
-	if os.Args[1] == "google" {
-		queryFormat = "https://www.google.com.tw/search?q=%s&start=%d"
+	if engine == "google" {
+		queryFormat = "http://www.google.com.tw/search?q=%s&start=%d"
 		querySelector = "h3.r a"
 		startCount = -10
 		startRating = 1
@@ -43,15 +43,18 @@ func Crawl() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	target := InitTarget(os.Args[2], os.Args[3], startCount, startRating)
+	target := InitTarget(keyword, targetUrl, startCount, startRating)
 	doQuery := true
-
+	doFind := true
 	var realLink string
+
 	for doQuery {
 		target.Page++
 		target.Start += 10
+		queryUrl := fmt.Sprintf(queryFormat, target.Key, target.Start)
+		fmt.Println(queryUrl)
 
-		response, err := http.Get(fmt.Sprintf(queryFormat, target.Key, target.Start))
+		response, err := http.Get(queryUrl)
 		checkError(err)
 		defer response.Body.Close()
 
@@ -64,7 +67,7 @@ func Crawl() {
 				target.Rating++
 				u, err := url.Parse(str)
 				checkError(err)
-				if os.Args[1] == "google" {
+				if engine == "google" {
 					m, _ := url.ParseQuery(u.RawQuery)
 					realLink = m["q"][0]
 				} else {
@@ -73,17 +76,18 @@ func Crawl() {
 				if realLink == target.Url {
 					fmt.Printf("key: %s, url: %s, rating: %d, page: %d\n",
 						target.Key, target.Url, target.Rating-1, target.Page)
-					dbInsert, err := db.Prepare("insert into test_search_query (keyword, url, rating, page) values (?, ?, ?, ?)")
+					dbInsert, err := db.Prepare("insert into targets_logs (target_id, search_engine, rating, page, recorded_at) values (?, ?, ?, ?, ?)")
 					checkError(err)
 					defer dbInsert.Close()
-					_, err = dbInsert.Exec(target.Key, target.Url, target.Rating-1, target.Page)
+					timestamp := time.Now().Local().Format("2006-01-02 15:04:05")
+					_, err = dbInsert.Exec(targetID, engine, target.Rating-1, target.Page, timestamp)
 					checkError(err)
-					os.Exit(1)
+					doFind = false
 				}
 			}
 		})
 
-		if target.Page >= 3 {
+		if target.Page >= 3 || !doFind {
 			doQuery = false
 		}
 	}
