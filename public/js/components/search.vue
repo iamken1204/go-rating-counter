@@ -3,6 +3,7 @@
     <h1>搜尋網址</h1>
     <input name="url" v-model="url">
     <button v-on:click="searchUrl">搜尋</button>
+    <p v-if="notFoundFlag">{{ notFoundUrl }} 尚未有 Log 資料</p>
 </div>
 <div>
     <!-- <h4 v-if="urlIsExist()">關鍵字：{{ keyword }}網址：{{ url }}</h4> -->
@@ -26,6 +27,8 @@ export default {
             keyword: "",
             url: "",
             seos: [],
+            notFoundFlag: false,
+            notFoundUrl: "",
         }
     },
 
@@ -39,7 +42,13 @@ export default {
         urlIsExist (url) {
             var data = {url: url}
             this.$http.post('/api/search/url', data, function(res) {
-                this.seos = res
+                if (res.length == 0) {
+                    this.notFoundUrl = url
+                    this.notFoundFlag = true
+                } else {
+                    this.notFoundFlag = false
+                    this.seos = res
+                }
             })
             return true
         },

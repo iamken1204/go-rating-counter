@@ -10653,6 +10653,7 @@
 	//     <h1>搜尋網址</h1>
 	//     <input name="url" v-model="url">
 	//     <button v-on:click="searchUrl">搜尋</button>
+	//     <p v-if="notFoundFlag">{{ notFoundUrl }} 尚未有 Log 資料</p>
 	// </div>
 	// <div>
 	//     <!-- <h4 v-if="urlIsExist()">關鍵字：{{ keyword }}網址：{{ url }}</h4> -->
@@ -10675,7 +10676,9 @@
 	        return {
 	            keyword: "",
 	            url: "",
-	            seos: []
+	            seos: [],
+	            notFoundFlag: false,
+	            notFoundUrl: ""
 	        };
 	    },
 	
@@ -10688,7 +10691,13 @@
 	        urlIsExist: function urlIsExist(url) {
 	            var data = { url: url };
 	            this.$http.post('/api/search/url', data, function (res) {
-	                this.seos = res;
+	                if (res.length == 0) {
+	                    this.notFoundUrl = url;
+	                    this.notFoundFlag = true;
+	                } else {
+	                    this.notFoundFlag = false;
+	                    this.seos = res;
+	                }
 	            });
 	            return true;
 	        },
@@ -10707,7 +10716,7 @@
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n    <h1>搜尋網址</h1>\n    <input name=\"url\" v-model=\"url\">\n    <button v-on:click=\"searchUrl\">搜尋</button>\n</div>\n<div>\n    <!-- <h4 v-if=\"urlIsExist()\">關鍵字：{{ keyword }}網址：{{ url }}</h4> -->\n    <table>\n        <tr>\n            <td>名次</td>\n            <td>紀錄日期</td>\n        </tr>\n        <tr v-for=\"seo in seos\">\n            <td>{{ seo.rating }}</td>\n            <td>{{ seo.recorded_at }}</td>\n        </tr>\n    </table>\n</div>";
+	module.exports = "<div>\n    <h1>搜尋網址</h1>\n    <input name=\"url\" v-model=\"url\">\n    <button v-on:click=\"searchUrl\">搜尋</button>\n    <p v-if=\"notFoundFlag\">{{ notFoundUrl }} 尚未有 Log 資料</p>\n</div>\n<div>\n    <!-- <h4 v-if=\"urlIsExist()\">關鍵字：{{ keyword }}網址：{{ url }}</h4> -->\n    <table>\n        <tr>\n            <td>名次</td>\n            <td>紀錄日期</td>\n        </tr>\n        <tr v-for=\"seo in seos\">\n            <td>{{ seo.rating }}</td>\n            <td>{{ seo.recorded_at }}</td>\n        </tr>\n    </table>\n</div>";
 
 /***/ }
 /******/ ]);
