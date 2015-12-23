@@ -73,7 +73,7 @@ func Create(data func(string) string) bool {
 	defer db.Close()
 	var log []Logs
 	// timestamp := time.Now().Local().Format("2006-01-02 15:04:05")
-	target := Targets{0, data("url"), data("keyword"), "1", log}
+	target := Targets{0, data("keyword"), data("url"), "1", log}
 	db.NewRecord(target)
 	db.Create(&target)
 	return true
