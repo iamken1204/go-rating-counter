@@ -1,7 +1,7 @@
 <template>
 <div class="ff">
   <h1>新增搜尋目標</h1>
-  URL: <input v-model="form.url">
+  URL: <textarea v-model="form.url" rows="5" cols="50"></textarea>
   Keyword: <textarea v-model="form.keyword" rows="5" cols="50"></textarea>
   <button v-on:click="addTarget">新增</button>
 </div>
